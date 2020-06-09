@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'xadmin',
     'crispy_forms',
-    'reversion'
+    'reversion',
+    'mdeditor',
+    'blog.apps.BlogConfig'
 ]
 
 MIDDLEWARE = [
@@ -119,7 +121,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# 设置静态文件目录和名称
 STATIC_URL = '/static/'
+
+# 设置文件上传路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 这个是设置静态文件夹目录的路径
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

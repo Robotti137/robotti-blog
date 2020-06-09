@@ -13,10 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.conf import settings
+from xadmin.plugins import xversion
+from django.views.static import serve
 import xadmin
+
+xadmin.autodiscover()
+xversion.register_models()
 
 urlpatterns = [
     path('blog/', include('blog.urls')),
-    path('xadmin/', xadmin.site.urls)
+    path('xadmin/', xadmin.site.urls),
+    path('mdeditor/', include('mdeditor.urls')),
+    re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})
 ]
